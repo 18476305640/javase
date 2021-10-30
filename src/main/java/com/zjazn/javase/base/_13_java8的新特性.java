@@ -116,4 +116,5 @@ class Gms {
 
 /**
  * 除了上面说的，还有StreamAPI等JAVA8的新特性
+ * 继续学习请转自哔哩哔哩： https://www.bilibili.com/video/BV1Kb411W75N?p=677
  */
