@@ -26,24 +26,15 @@ public class _12_动态代理 {
 
 class ProxyFactory {
     public static Object getProxyInstance(Object obj) {
-        MyInvocationHandle invocationHandle = new MyInvocationHandle(obj);
-        return Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(),invocationHandle );
-    }
-
-}
-
-class MyInvocationHandle implements InvocationHandler {
-    private Object obj;
-    public MyInvocationHandle(Object obj) {
-        this.obj = obj;
-    }
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println(method.getName()+"-method-invoke-before~"); //AOP
-        Object invoke = method.invoke(obj, args);
-        System.out.println(method.getName()+"-method-invoke-after~"); //AOP
-        return invoke;
-
+        return Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(), new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println(method.getName()+"-method-invoke-before~"); //AOP
+                Object invoke = method.invoke(obj, args);
+                System.out.println(method.getName()+"-method-invoke-after~"); //AOP
+                return invoke;
+            }
+        });
     }
 }
 
